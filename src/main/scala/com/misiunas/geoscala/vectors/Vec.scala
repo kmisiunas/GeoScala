@@ -14,15 +14,17 @@ import com.misiunas.geoscala.Point
  * Date: 10/08/2013
  * Time: 21:52
  */
-class Vec protected (val x: Double, val y: Double, val z: Double) extends Vector3DLike{
-
-  protected type That = Vec
+class Vec protected (val x: Double, val y: Double, val z: Double) extends Vector3DLike[Vec] {
 
   override def toString = "Vec("+x+", "+y+", "+z+")"
 
   protected def makeFrom(e1: Double, e2: Double, e3: Double): Vec = new Vec(e1,e2,e3)
 
+  // ------ Convenient conversions -----------
+
   def toPoint: Point = Point(x,y,z)
+
+  def toVec: Vec = Vec(x,y,z)
 
 }
 

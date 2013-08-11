@@ -16,15 +16,13 @@ import com.misiunas.geoscala.vectors.{Vector3DLike, Vec}
  * Time: 21:21
  */
 class Point protected (override val x: Double, override val y:Double, override val z:Double) extends
-  Vector3DLike with Feature {
+  Vec (x,y,z) with Feature {
 
-  protected type That = Point
-
-  protected def makeFrom(e1: Double, e2: Double, e3: Double): Point = new Point(e1,e2,e3)
+  override protected def makeFrom(e1: Double, e2: Double, e3: Double): Point = new Point(e1,e2,e3)
 
   override def toString = "Point("+x+", "+y+", "+z+")"
 
-  def toVec: Vec = Vec(x,y,z)
+  // --- other implementations ---
 
   def distance(that: Point): Double = (this - that).vectorLength
 
@@ -36,4 +34,5 @@ object Point {
   def apply(x:Double) : Point = new Point(x,0,0)
 
   implicit def point2Vec(p:Point): Vec = p.toVec
+  implicit def vec2Point(p:Vec): Point = p.toPoint
 }

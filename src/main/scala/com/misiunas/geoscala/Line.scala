@@ -1,5 +1,7 @@
 package com.misiunas.geoscala
 
+import com.misiunas.geoscala.vectors.Vec
+
 /**
  * == A geometrical line ==
  *
@@ -17,6 +19,12 @@ class Line private (val p1: Point, val p2: Point) extends Feature {
     // point distance to a line
     return (p - p1).vectorLength - ((p - p1) dot (p2 - p1).normalise)
   }
+
+  def toEq: Double => Point =
+    t => ???
+
+  def direction: Vec = (p2 - p1).toVec
+
 }
 
 object Line{
