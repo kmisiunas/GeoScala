@@ -15,7 +15,7 @@ trait PointDecomposition[T <: PointDecomposition[T]] {
   /** gets a list of points that defines the shape - order matters */
   def getPoints: List[Point]
 
-  /** THe shape can be constructed from ordered list of points */
+  /** The shape can be constructed from ordered list of points */
   def constructFromPoints(list: List[Point]): T
 
 }

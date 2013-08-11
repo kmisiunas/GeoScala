@@ -1,5 +1,8 @@
 package com.misiunas.geoscala.vectors
 
+import breeze.linalg.DenseVector
+import com.misiunas.geoscala.Point
+
 /**
  * == A representation of 3D vector ==
  *
@@ -99,5 +102,30 @@ trait Vector3DLike[T <: Vector3DLike[T]] {
 
   def normalise: T  = this * (1/vectorLength)
 
+  // ----- Computability with scala NLP - Breeze --------
 
+  def toNLP: DenseVector[Double] = DenseVector(Array(x,y,z))
+
+  def fromNLP(dv: DenseVector[Double]): T =
+    if (dv.size == 3) makeFrom(dv(0), dv(1), dv(2))
+  else throw new IllegalArgumentException("DenseVector size must be 3")
+
+}
+
+
+trait Vector3DLikeObj[T <: Vector3DLike[T]] {
+
+  protected def makeFrom(e1: Double, e2: Double, e3: Double): T
+
+  def apply(x:Double, y:Double, z:Double): T = makeFrom(x,y,z)
+  def apply(x:Double, y:Double): T = makeFrom(x,y,0)
+  def apply(x:Double): T = makeFrom(x,0,0)
+  def apply(ar:Array[Double]): T =
+    if (ar.size == 3) makeFrom(ar(0), ar(1), ar(2))
+    else throw new IllegalArgumentException("Vec(array) size of array must be 3")
+
+  implicit def vec2Point(p:Vec): Point = p.toPoint
+  implicit def point2Vec(p:Point): Vec = p.toVec
+
+  implicit def fromDenseVector(dv: DenseVector[Double]): T = apply(dv.toArray)
 }

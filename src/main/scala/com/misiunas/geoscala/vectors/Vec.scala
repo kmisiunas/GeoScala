@@ -1,6 +1,7 @@
 package com.misiunas.geoscala.vectors
 
 import com.misiunas.geoscala.Point
+import breeze.linalg.DenseVector
 
 /**
  * == Simple 3D vector representation ==
@@ -28,11 +29,7 @@ class Vec protected (val x: Double, val y: Double, val z: Double) extends Vector
 
 }
 
-object Vec {
-  def apply(x:Double, y:Double, z:Double): Vec = new Vec(x,y,z)
-  def apply(x:Double, y:Double): Vec = new Vec(x,y,0)
-  def apply(x:Double): Vec = new Vec(x,0,0)
-
-  implicit def vec2Point(p:Vec): Point = p.toPoint
-
+object Vec extends Vector3DLikeObj[Vec] {
+  protected def makeFrom(e1: Double, e2: Double, e3: Double): Vec = new Vec(e1,e2,e3)
 }
+

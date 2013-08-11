@@ -1,6 +1,7 @@
 package com.misiunas.geoscala
 
-import com.misiunas.geoscala.vectors.{Vector3DLike, Vec}
+import com.misiunas.geoscala.vectors.{Vector3DLikeObj, Vector3DLike, Vec}
+import com.misiunas.geoscala.transformations.GeometricTransformations
 
 //import _root_.breeze.linalg.DenseVector
 
@@ -16,7 +17,7 @@ import com.misiunas.geoscala.vectors.{Vector3DLike, Vec}
  * Time: 21:21
  */
 class Point protected (override val x: Double, override val y:Double, override val z:Double) extends
-  Vec (x,y,z) with Feature {
+  Vec (x,y,z) with Feature  with GeometricTransformations[Point] {
 
   override protected def makeFrom(e1: Double, e2: Double, e3: Double): Point = new Point(e1,e2,e3)
 
@@ -26,13 +27,10 @@ class Point protected (override val x: Double, override val y:Double, override v
 
   def distance(that: Point): Double = (this - that).vectorLength
 
+  def getPoints: List[Point] = List(this)
+  def constructFromPoints(list: List[Point]): Point = list.head
 }
 
-object Point {
-  def apply(x:Double, y:Double, z:Double) : Point = new Point(x,y,z)
-  def apply(x:Double, y:Double) : Point = new Point(x,y,0)
-  def apply(x:Double) : Point = new Point(x,0,0)
-
-  implicit def point2Vec(p:Point): Vec = p.toVec
-  implicit def vec2Point(p:Vec): Point = p.toPoint
+object Point  extends Vector3DLikeObj[Point] {
+  protected def makeFrom(e1: Double, e2: Double, e3: Double): Point = new Point(e1,e2,e3)
 }

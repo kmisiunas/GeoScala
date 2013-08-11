@@ -10,6 +10,7 @@ Suggestions are very welcome.
  - lightweight
  - intuitive
  - designed for scala
+ - works with [Breeze](https://github.com/scalanlp/breeze)
 
 
 
