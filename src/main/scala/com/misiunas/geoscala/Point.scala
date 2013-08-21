@@ -2,6 +2,7 @@ package com.misiunas.geoscala
 
 import com.misiunas.geoscala.vectors.{Vector3DLikeObj, Vector3DLike, Vec}
 import com.misiunas.geoscala.transformations.GeometricTransformations
+import breeze.linalg.DenseVector
 
 //import _root_.breeze.linalg.DenseVector
 
@@ -17,7 +18,7 @@ import com.misiunas.geoscala.transformations.GeometricTransformations
  * Time: 21:21
  */
 class Point protected (override val x: Double, override val y:Double, override val z:Double) extends
-  Vec (x,y,z) with Feature  with GeometricTransformations[Point] {
+  Vec (x,y,z) with Feature with GeometricTransformations[Point] {
 
   override protected def makeFrom(e1: Double, e2: Double, e3: Double): Point = new Point(e1,e2,e3)
 
@@ -31,6 +32,21 @@ class Point protected (override val x: Double, override val y:Double, override v
   def constructFromPoints(list: List[Point]): Point = list.head
 }
 
-object Point  extends Vector3DLikeObj[Point] {
+object Point  {
+
   protected def makeFrom(e1: Double, e2: Double, e3: Double): Point = new Point(e1,e2,e3)
+
+  implicit def point2Vec(p:Point): Vec = p.toVec
+
+  implicit def fromDenseVector(dv: DenseVector[Double]): Point = apply(dv.toArray)
+
+  // tmp fix:
+  type T = Point
+  def apply(x:Double, y:Double, z:Double): T = makeFrom(x,y,z)
+  def apply(x:Double, y:Double): T = makeFrom(x,y,0)
+  def apply(x:Double): T = makeFrom(x,0,0)
+  def apply(ar:Array[Double]): T =
+    if (ar.size == 3) makeFrom(ar(0), ar(1), ar(2))
+    else throw new IllegalArgumentException("Vec(array) size of array must be 3")
+
 }

@@ -114,6 +114,7 @@ trait Vector3DLike[T <: Vector3DLike[T]] {
 
 
 trait Vector3DLikeObj[T <: Vector3DLike[T]] {
+  // this method does not work because in inheritance is messy - fix it
 
   protected def makeFrom(e1: Double, e2: Double, e3: Double): T
 
@@ -124,8 +125,4 @@ trait Vector3DLikeObj[T <: Vector3DLike[T]] {
     if (ar.size == 3) makeFrom(ar(0), ar(1), ar(2))
     else throw new IllegalArgumentException("Vec(array) size of array must be 3")
 
-  implicit def vec2Point(p:Vec): Point = p.toPoint
-  implicit def point2Vec(p:Point): Vec = p.toVec
-
-  implicit def fromDenseVector(dv: DenseVector[Double]): T = apply(dv.toArray)
 }

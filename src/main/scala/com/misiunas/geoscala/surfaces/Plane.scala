@@ -1,6 +1,6 @@
 package com.misiunas.geoscala.surfaces
 
-import com.misiunas.geoscala.{Point, Feature}
+import com.misiunas.geoscala.{Line, Point, Feature}
 import com.misiunas.geoscala.transformations.GeometricTransformations
 
 /**
@@ -14,6 +14,9 @@ class Plane private (val p1: Point, val p2: Point, val p3: Point) extends Featur
 
   def getPoints: List[Point] = List(p1,p2,p3)
   def constructFromPoints(list: List[Point]): Plane = Plane(list)
+
+
+  def intersection(l: Line): Point = ???
 
 }
 

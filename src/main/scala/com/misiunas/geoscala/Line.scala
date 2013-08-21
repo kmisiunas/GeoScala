@@ -28,6 +28,8 @@ class Line private (val p1: Point, val p2: Point) extends Feature with Geometric
 
   def getPoints: List[Point] = List(p1, p2)
   def constructFromPoints(list: List[Point]): Line = Line(list)
+
+
 }
 
 object Line{
