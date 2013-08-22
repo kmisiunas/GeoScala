@@ -94,6 +94,9 @@ trait Vector3DLike[T <: Vector3DLike[T]] {
   /** returns number of elements in this vector */
   def size: Int = 3
 
+  /** Return san angle between two vectors in radians */
+  def angle(that: T): Double = Math.acos( (this dot that) / (this.vectorLength * that.vectorLength) )
+
   /** the length of this vector */
   @deprecated("Warning: .length is not compatible with Breeze NL.")
   def length: Double = vectorLength

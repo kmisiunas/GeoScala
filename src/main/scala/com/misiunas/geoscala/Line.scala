@@ -21,14 +21,18 @@ class Line private (val p1: Point, val p2: Point) extends Feature with Geometric
     (p - p1).vectorLength - ((p - p1) dot (p2 - p1).normalise)
   }
 
-  def toEq: Double => Point = ???
+  def toVec: Vec = p2 - p1
+
+  /** equation of this line */
+  def toEq: Double => Point = x => direction * x + p1
 
   /** direction of the line - unit vector */
-  def direction: Vec = (p2 - p1).toVec.normalise
+  def direction: Vec = toVec.normalise
 
   def getPoints: List[Point] = List(p1, p2)
   def constructFromPoints(list: List[Point]): Line = Line(list)
 
+  def length = toVec.vectorLength
 
 }
 

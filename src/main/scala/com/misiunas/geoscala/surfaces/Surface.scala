@@ -1,6 +1,8 @@
 package com.misiunas.geoscala.surfaces
 
-import com.misiunas.geoscala.Feature
+import com.misiunas.geoscala.{Point, Feature}
+import com.misiunas.geoscala.vectors.Vec
+import com.misiunas.geoscala.DoubleWithAlmostEquals
 
 /**
  * == A surface ==
@@ -12,6 +14,8 @@ import com.misiunas.geoscala.Feature
  */
 trait Surface extends Feature {
 
-  /** get normal of this surface */
+  def isWithin(p: Point): Boolean = distance(p) ~== 0.0 // approximate for long manipulations
+
+  def normal: Vec
 
 }
