@@ -18,4 +18,9 @@ trait PointDecomposition[T <: PointDecomposition[T]] {
   /** The shape can be constructed from ordered list of points */
   def constructFromPoints(list: List[Point]): T
 
+  override def equals(a: Any): Boolean = a match {
+    case pd: PointDecomposition[T] => this.getPoints == pd.getPoints // not sure if this is the best method, as it uses T
+    case _ => false
+  }
+
 }

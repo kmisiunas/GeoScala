@@ -5,6 +5,7 @@ package com.misiunas.geoscala.transformations
  * Date: 11/08/2013
  * Time: 19:35
  */
-trait GeometricTransformations[T <: GeometricTransformations[T]] extends Rotations[T] with Translations[T]{
+trait GeometricTransformations[T <: GeometricTransformations[T]] extends Rotations[T] with Translations[T]
+  with CartesianSpaceObject[T]{
   this: T =>
 }

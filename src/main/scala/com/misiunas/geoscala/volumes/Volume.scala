@@ -11,7 +11,7 @@ import com.misiunas.geoscala.{Point, Feature}
  */
 trait Volume extends Feature {
 
-/** is the point within the volume element? */
-def isWithin(p: Point) : Boolean
+  /** is the point within the volume element? */
+  def isWithin(p: Point) : Boolean
 
 }
