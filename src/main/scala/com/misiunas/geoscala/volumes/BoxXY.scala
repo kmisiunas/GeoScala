@@ -30,7 +30,7 @@ class BoxXY private (val rect: Rectangle) extends Volume  with CartesianSpaceObj
 
 object BoxXY {
 
-  def apply(p: Point, width: Double, height: Double, placement: String = "corner") {
+  def apply(p: Point, width: Double, height: Double, placement: String = "corner"):BoxXY =  {
     new BoxXY( Rectangle.xy(Point(p.x,p.y,0), width, height, placement) )
   }
 

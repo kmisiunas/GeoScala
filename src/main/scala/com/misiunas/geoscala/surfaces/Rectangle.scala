@@ -21,7 +21,7 @@ object Rectangle {
 
   /** constructor checks if right angles were satisfied */
   def apply(p1: Point, p2: Point, p3: Point): Rectangle = {
-    if( (p2 - p1) angle (p3 - p1) ~== Math.PI/2) new Rectangle(p1,p2,p3)
+    if( (p1 - p2) angle (p3 - p2) ~== Math.PI/2) new Rectangle(p1,p2,p3)
     else throw new RuntimeException("Rectangle must have right corners. The specified was ")
   }
 

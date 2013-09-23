@@ -18,7 +18,7 @@ import breeze.linalg.DenseVector
  * Time: 21:21
  */
 class Point protected (override val x: Double, override val y:Double, override val z:Double) extends
-  Vec (x,y,z) with Feature with GeometricTransformations[Point] {
+  Vec (x,y,z) with Feature  {
 
   override protected def makeFrom(e1: Double, e2: Double, e3: Double): Point = new Point(e1,e2,e3)
 
@@ -30,6 +30,7 @@ class Point protected (override val x: Double, override val y:Double, override v
 
   def getPoints: List[Point] = List(this)
   def constructFromPoints(list: List[Point]): Point = list.head
+
 }
 
 object Point  {

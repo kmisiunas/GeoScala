@@ -1,5 +1,6 @@
-import com.misiunas.geoscala.Point
 import org.scalatest.FunSuite
+import com.misiunas.geoscala.{Point, DoubleWithAlmostEquals}
+
 
 /**
  * User: karolis@misiunas.com
@@ -41,5 +42,16 @@ class PointTest extends FunSuite {
     assert(p1 - p2 * 10 == p1 - (p2 * 10))
     assert(-p2 * 10 + p1 == p1 - (p2 * 10))
   }
+
+  test("Point angle") {
+    assert(p5 angle p6 ~== Math.PI/2)
+    assert(-p2 * 10 + p1 == p1 - (p2 * 10))
+  }
+
+  test("DoubleWithAlmostEquals test") {
+    assert(0.1 ~== 0.1 + Double.MinPositiveValue*2)
+    assert( !(0.1 ~== 0.100001 + Double.MinPositiveValue*2) )
+  }
+
 
 }
