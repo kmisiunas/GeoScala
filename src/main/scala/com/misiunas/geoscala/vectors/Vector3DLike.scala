@@ -17,7 +17,7 @@ import com.misiunas.geoscala.Point
  * Date: 11/08/2013
  * Time: 02:07
  */
-trait Vector3DLike[T <: Vector3DLike[T]] {
+trait Vector3DLike[T <: Vector3DLike[T]] extends AnyRef {
   this: T =>
 
   // ------------ Implementations needed ------------
@@ -62,6 +62,10 @@ trait Vector3DLike[T <: Vector3DLike[T]] {
     case t: Vector3DLike[T] => t.x == x && t.y == y && t.z == z // unnecessary?
     case _ => false
   }
+
+  /** method to make a copy with specific change to the vector */
+  def copy(x: Double = this.x, y: Double = this.y, z:Double = this.z): T = makeFrom(x,y,z)
+  def copy: T = this // immutable
 
   // ---------- Common Maths Manipulations ---------
 

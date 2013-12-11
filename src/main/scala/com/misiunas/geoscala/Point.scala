@@ -46,8 +46,10 @@ object Point  {
   def apply(x:Double, y:Double, z:Double): T = makeFrom(x,y,z)
   def apply(x:Double, y:Double): T = makeFrom(x,y,0)
   def apply(x:Double): T = makeFrom(x,0,0)
-  def apply(ar:Array[Double]): T =
+  def apply(ar:Seq[Double]): T =
     if (ar.size == 3) makeFrom(ar(0), ar(1), ar(2))
     else throw new IllegalArgumentException("Vec(array) size of array must be 3")
+
+  def apply(dv: DenseVector[Double]): Point = apply(dv.toArray)
 
 }

@@ -27,6 +27,8 @@ class Vec protected (val x: Double, val y: Double, val z: Double) extends Vector
 
   def toVec: Vec = Vec(x,y,z)
 
+  def toEq: Point => Double = p => (p.x * x + p.y*y + p.z+z)
+
 }
 
 object Vec  {
@@ -41,7 +43,7 @@ object Vec  {
   def apply(x:Double, y:Double, z:Double): T = makeFrom(x,y,z)
   def apply(x:Double, y:Double): T = makeFrom(x,y,0)
   def apply(x:Double): T = makeFrom(x,0,0)
-  def apply(ar:Array[Double]): T =
+  def apply(ar:Seq[Double]): T =
     if (ar.size == 3) makeFrom(ar(0), ar(1), ar(2))
     else throw new IllegalArgumentException("Vec(array) size of array must be 3")
 
@@ -52,6 +54,10 @@ object Vec  {
          f(Point(0,0,1)) - f(Point(0,0,0))
     ).normalise
   }
+
+  def x: Vec = Vec(1,0,0)
+  def y: Vec = Vec(0,1,0)
+  def z: Vec = Vec(0,0,1)
 
 }
 

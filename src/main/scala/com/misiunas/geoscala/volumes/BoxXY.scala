@@ -2,7 +2,7 @@ package com.misiunas.geoscala.volumes
 
 import com.misiunas.geoscala.Point
 import com.misiunas.geoscala.surfaces.Rectangle
-import com.misiunas.geoscala.transformations.CartesianSpaceObject
+import com.misiunas.geoscala.transformations.{GeometricTransformations, CartesianSpaceObject}
 
 /**
  * == A 2D rectangle on XY plane, where Z coordinate is projected all along Z, thus an infinite box ==
@@ -16,14 +16,11 @@ import com.misiunas.geoscala.transformations.CartesianSpaceObject
  * Date: 21/08/2013
  * Time: 16:03
  */
-class BoxXY private (val rect: Rectangle) extends Volume  with CartesianSpaceObject[BoxXY]{
+class BoxXY private (val rect: Rectangle) extends Volume  with CartesianSpaceObject[BoxXY] with GeometricTransformations[BoxXY]{
 
   // slow implementations - improve
   def isWithin(p: Point): Boolean = rect.isWithin( Point(p.x,p.y,0) )
   def distance(p: Point): Double = rect.distance( Point(p.x,p.y,0) )
-
-  def overlaps(v: Volume): Boolean = ???
-
 
   def getPoints: List[Point] = rect.getPoints
 
