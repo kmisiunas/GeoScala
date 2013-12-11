@@ -9,7 +9,7 @@ import com.misiunas.geoscala.Point
  * Date: 11/08/2013
  * Time: 16:55
  */
-trait PointDecomposition[T <: PointDecomposition[T]] {
+trait PointDecomposition[T <: PointDecomposition[T]] extends AnyRef {
   this: T =>
 
   /** gets a list of points that defines the shape - order matters */
