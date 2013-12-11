@@ -15,10 +15,10 @@ class Line private (val p1: Point, val p2: Point) extends Feature with Geometric
 
   def distance(p: Point): Double = {
     // more complex as it is not infinite line => have to check the ends first
-    if( ((p - p1) dot (p2 - p1)) <= 0 ) return (p - p1).vectorLength
-    if( ((p - p2) dot (p1 - p2)) <= 0 ) return (p - p2).vectorLength
+    if( ((p - p1) dot direction) <= 0 ) return (p - p1).vectorLength
+    if( ((p - p2) dot direction) >= 0 ) return (p - p2).vectorLength
     // point distance to a line
-    (p - p1).vectorLength - ((p - p1) dot (p2 - p1).normalise)
+    ( (p - p1) cross (p - p2) ).abs / (p2 - p1).abs
   }
 
   def toVec: Vec = p2 - p1
@@ -34,12 +34,18 @@ class Line private (val p1: Point, val p2: Point) extends Feature with Geometric
 
   def length = toVec.vectorLength
 
+  override def toString: String = "Line( " + this.getPoints.mkString(", ") +")"
+
 }
 
-object Line{
+object Line {
+
   def apply(p1: Point, p2: Point): Line = new Line(p1,p2)
   def apply(list: List[Point]): Line = {
     if (list.size == 2) apply(list.head, list(1))
     else throw new IllegalArgumentException("Line needs exactly 2 Points to be constructed")
   }
+
+  def apply(f: Double => Point): Line =  Line( f(0), f(1) )
+
 }

@@ -15,13 +15,16 @@ class Rhombus protected (val p1: Point, val p2: Point, val p3: Point) extends Si
   with GeometricTransformations[Rhombus] {
 
   /** point determined by right angles */
-  def p4: Point = p1 - (p2 - p3)
+  def p4: Point = p1 + (p3 - p2)
 
   def getPoints: List[Point] = List(p1,p2,p3,p4)
   def constructFromPoints(l: List[Point]): Rhombus = Rhombus(l(0),l(1),l(2))
 
   /** get all vertices */
   def vertices: List[Point] = getPoints
+
+  override def toString: String = "Rhombus( " + this.getPoints.mkString(", ") +")"
+
 }
 
 object Rhombus {

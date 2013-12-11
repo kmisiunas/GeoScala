@@ -103,6 +103,9 @@ trait Vector3DLike[T <: Vector3DLike[T]] {
 
   def vectorLength: Double = Math.sqrt(x*x + y*y + z*z)
 
+  /** returns length of the vector */
+  def abs: Double = vectorLength
+
   def normalise: T  = this * (1/vectorLength)
 
   // ----- Computability with scala NLP - Breeze --------

@@ -15,6 +15,10 @@ class Everywhere private () extends Volume {
 
   def isWithin(p: Point): Boolean = true
 
+  def overlaps(v: Volume): Boolean = true
+
+  def contains(v: Volume): Boolean = true
+
   override def toString: String = "Everywhere(Volume)"
 }
 

@@ -45,5 +45,13 @@ object Vec  {
     if (ar.size == 3) makeFrom(ar(0), ar(1), ar(2))
     else throw new IllegalArgumentException("Vec(array) size of array must be 3")
 
+  /** constructs vector assuming that it is linear */
+  def apply(f: Point => Double): Vec = {
+    Vec( f(Point(1,0,0)) - f(Point(0,0,0)),
+         f(Point(0,1,0)) - f(Point(0,0,0)),
+         f(Point(0,0,1)) - f(Point(0,0,0))
+    ).normalise
+  }
+
 }
 

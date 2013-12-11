@@ -15,6 +15,9 @@ class Rectangle protected (override val p1: Point, override val p2: Point, overr
 
   override def constructFromPoints(l: List[Point]): Rectangle = Rectangle(l(0),l(1),l(2))
 
+  override def toString: String = "Rectangle( " + this.getPoints.mkString(", ") +")"
+
+
 }
 
 object Rectangle {

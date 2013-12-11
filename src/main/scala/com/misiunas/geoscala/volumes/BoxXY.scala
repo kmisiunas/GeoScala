@@ -22,10 +22,15 @@ class BoxXY private (val rect: Rectangle) extends Volume  with CartesianSpaceObj
   def isWithin(p: Point): Boolean = rect.isWithin( Point(p.x,p.y,0) )
   def distance(p: Point): Double = rect.distance( Point(p.x,p.y,0) )
 
+  def overlaps(v: Volume): Boolean = ???
+
+
   def getPoints: List[Point] = rect.getPoints
 
   /** The shape can be constructed from ordered list of points */
   def constructFromPoints(list: List[Point]): BoxXY = new BoxXY( rect.constructFromPoints(list) )
+
+  override def toString: String = "BoxXY( " + this.getPoints.mkString(", ") +")"
 }
 
 object BoxXY {
@@ -33,5 +38,7 @@ object BoxXY {
   def apply(p: Point, width: Double, height: Double, placement: String = "corner"):BoxXY =  {
     new BoxXY( Rectangle.xy(Point(p.x,p.y,0), width, height, placement) )
   }
+
+  def apply(p1: Point, p2: Point): BoxXY = BoxXY.apply(p1, (p2 - p1).x, (p2 - p1).y,  "corner")
 
 }

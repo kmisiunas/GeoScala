@@ -11,15 +11,6 @@ import com.misiunas.geoscala.surfaces.{Rectangle, Plane}
  */
 class RectangleTest extends FunSuite {
 
-  val p1 = Point(1.1,2.2,3.3)
-  val p2 = Point(3,2,1)
-  val p3 = Point(1,0,0)
-  val p4 = Point(0,0,0)
-  val p5 = Point(0,1,0)
-  val p6 = Point(0,3,0)
-
-  val planeXY = Plane(p3,p4,p5)
-
   test("Rectangle.apply") {
     var r: Rectangle  = null
     try{

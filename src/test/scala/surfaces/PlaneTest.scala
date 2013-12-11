@@ -26,7 +26,7 @@ class PlaneTest extends FunSuite {
 
   test("Plane.project") {
     assert(planeXY.project(Point(0,0,1)) == Point(0,0,0))
-    assert(planeXY.project(Point(1,1,-1)) == Point(1,1,0))
+    assert(planeXY.project(Point(1,1,-1)) == Point(1,1,0), "ups! projected Point(1,1,-1) = " + planeXY.project(Point(1,1,-1)))
   }
 
 }

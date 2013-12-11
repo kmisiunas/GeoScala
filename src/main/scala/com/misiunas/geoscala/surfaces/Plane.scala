@@ -12,7 +12,7 @@ import com.misiunas.geoscala.vectors.Vec
 class Plane private (val p1: Point, val p2: Point, val p3: Point) extends Feature
   with GeometricTransformations[Plane] with Surface{
 
-  def distance(p: Point): Double = normal dot p
+  def distance(p: Point): Double = (normal dot p).abs
 
   def getPoints: List[Point] = List(p1,p2,p3)
   def constructFromPoints(list: List[Point]): Plane = Plane(list)
@@ -23,7 +23,7 @@ class Plane private (val p1: Point, val p2: Point, val p3: Point) extends Featur
   lazy val normal: Vec = ( (p1 - p2) cross (p3 - p2) ).normalise
 
   /** projects a point to this surface */
-  def project(p: Point): Point = p - normal * distance(p)
+  def project(p: Point): Point = p - normal * (normal dot p)
 
 }
 

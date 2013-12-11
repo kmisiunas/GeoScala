@@ -28,7 +28,7 @@ trait SimplePolygon extends OnAPlane with Surface {
     val onPlane = getPlane.project(p)
     val lines = this.lines
     // is the projection within the polygon
-    if ( lines.forall(line => (line.toVec cross onPlane dot normal) > 0) ){ // not sure if this is the right direction
+    if ( lines.forall(line => (line.toVec cross (onPlane - line.p1) dot normal) < 0) ){ // not sure if this is the right direction
       getPlane.distance(p)
     } else { // projection outside the polygon - closet to the lines
       lines.map(_.distance(p)).min
