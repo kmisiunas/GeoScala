@@ -5,9 +5,9 @@ name := "GeoScala"
 
 organization := "com.misiunas"
 
-version := "0.1.3"
+version := "0.2.0"
 
-scalaVersion := "2.10.3"
+scalaVersion := "2.11.7"
 
 // Publish with command:
 // publish-local
@@ -16,10 +16,17 @@ scalaVersion := "2.10.3"
 // --- Libraries ---
 
 // TEST - http://www.scalatest.org/
-libraryDependencies += "org.scalatest" % "scalatest_2.10" % "2.0" % "test"
+libraryDependencies += "org.scalatest" % "scalatest_2.11" % "2.2.4" % "test"
 
-// BREEZE - https://github.com/scalanlp/breeze/
-libraryDependencies  += "org.scalanlp" % "breeze_2.10" % "0.5.2"
+libraryDependencies  ++= Seq(
+  // other dependencies here
+  "org.scalanlp" %% "breeze" % "0.11.2",
+  // native libraries are not included by default. add this if you want them (as of 0.7)
+  // native libraries greatly improve performance, but increase jar sizes.
+  // It also packages various blas implementations, which have licenses that may or may not
+  // be compatible with the Apache License. No GPL code, as best I know.
+  "org.scalanlp" %% "breeze-natives" % "0.11.2"
+)
 
 resolvers ++= Seq(
             // other resolvers here

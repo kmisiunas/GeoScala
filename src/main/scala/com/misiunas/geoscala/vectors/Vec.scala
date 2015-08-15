@@ -15,9 +15,11 @@ import breeze.linalg.DenseVector
  * Date: 10/08/2013
  * Time: 21:52
  */
-class Vec protected (val x: Double, val y: Double, val z: Double) extends Vector3DLike[Vec] {
+class Vec protected (val x: Double, val y: Double, val z: Double) extends Vector3DLike {
 
-  override def toString = "Vec("+x+", "+y+", "+z+")"
+  type T = Vec
+
+  override def toString: String = "Vec(" + x + ", " + y + ", " + z + ")"
 
   protected def makeFrom(e1: Double, e2: Double, e3: Double): Vec = new Vec(e1,e2,e3)
 

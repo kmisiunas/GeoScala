@@ -1,6 +1,6 @@
 package com.misiunas.geoscala
 
-import com.misiunas.geoscala.vectors.{Vector3DLikeObj, Vector3DLike, Vec}
+import com.misiunas.geoscala.vectors.{Vector3DLike, Vec}
 import com.misiunas.geoscala.transformations.GeometricTransformations
 import breeze.linalg.DenseVector
 
@@ -18,11 +18,13 @@ import breeze.linalg.DenseVector
  * Time: 21:21
  */
 class Point protected (override val x: Double, override val y:Double, override val z:Double) extends
-  Vec (x,y,z) with Feature  {
+  Vec (x,y,z) with Vector3DLike with Feature  {
+
+  override type T = Point
 
   override protected def makeFrom(e1: Double, e2: Double, e3: Double): Point = new Point(e1,e2,e3)
 
-  override def toString = "Point("+x+", "+y+", "+z+")"
+  override def toString: String = "Point("+x+", "+y+", "+z+")"
 
   // --- other implementations ---
 

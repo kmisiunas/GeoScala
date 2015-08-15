@@ -17,8 +17,11 @@ import com.misiunas.geoscala.Point
  * Date: 11/08/2013
  * Time: 02:07
  */
-trait Vector3DLike[T <: Vector3DLike[T]] extends AnyRef {
-  this: T =>
+//trait Vector3DLike[A <: Vector3DLike[A]] extends AnyRef {
+trait Vector3DLike extends AnyRef {
+  self =>
+  type T <: Vector3DLike {type T = self.T}
+  //this: T => // semi-works
 
   // ------------ Implementations needed ------------
 
@@ -59,13 +62,14 @@ trait Vector3DLike[T <: Vector3DLike[T]] extends AnyRef {
   // ---------- Other -----------
 
   override def equals(any: Any): Boolean = any match {
-    case t: Vector3DLike[T] => t.x == x && t.y == y && t.z == z // unnecessary?
+    case t: AnyRef if (this eq t) => true
+    case t: Vector3DLike => t.x == x && t.y == y && t.z == z // unnecessary?
     case _ => false
   }
 
   /** method to make a copy with specific change to the vector */
   def copy(x: Double = this.x, y: Double = this.y, z:Double = this.z): T = makeFrom(x,y,z)
-  def copy: T = this // immutable
+  def copy: T = ??? // immutable
 
   // ---------- Common Maths Manipulations ---------
 
@@ -99,13 +103,13 @@ trait Vector3DLike[T <: Vector3DLike[T]] extends AnyRef {
   def size: Int = 3
 
   /** Return san angle between two vectors in radians */
-  def angle(that: T): Double = Math.acos( (this dot that) / (this.vectorLength * that.vectorLength) )
+  def angle(that: T): Double = math.acos( (this dot that) / (this.vectorLength * that.vectorLength) )
 
   /** the length of this vector */
   @deprecated("Warning: .length is not compatible with Breeze NL.")
   def length: Double = vectorLength
 
-  def vectorLength: Double = Math.sqrt(x*x + y*y + z*z)
+  def vectorLength: Double = math.sqrt(x*x + y*y + z*z)
 
   /** returns length of the vector */
   def abs: Double = vectorLength
@@ -123,16 +127,16 @@ trait Vector3DLike[T <: Vector3DLike[T]] extends AnyRef {
 }
 
 
-trait Vector3DLikeObj[T <: Vector3DLike[T]] {
-  // this method does not work because in inheritance is messy - fix it
-
-  protected def makeFrom(e1: Double, e2: Double, e3: Double): T
-
-  def apply(x:Double, y:Double, z:Double): T = makeFrom(x,y,z)
-  def apply(x:Double, y:Double): T = makeFrom(x,y,0)
-  def apply(x:Double): T = makeFrom(x,0,0)
-  def apply(ar:Array[Double]): T =
-    if (ar.size == 3) makeFrom(ar(0), ar(1), ar(2))
-    else throw new IllegalArgumentException("Vec(array) size of array must be 3")
-
-}
+//trait Vector3DLikeObj[T <: Vector3DLike[T]] {
+//  // this method does not work because in inheritance is messy - fix it
+//
+//  protected def makeFrom(e1: Double, e2: Double, e3: Double): T
+//
+//  def apply(x:Double, y:Double, z:Double): T = makeFrom(x,y,z)
+//  def apply(x:Double, y:Double): T = makeFrom(x,y,0)
+//  def apply(x:Double): T = makeFrom(x,0,0)
+//  def apply(ar:Array[Double]): T =
+//    if (ar.size == 3) makeFrom(ar(0), ar(1), ar(2))
+//    else throw new IllegalArgumentException("Vec(array) size of array must be 3")
+//
+//}
