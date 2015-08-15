@@ -17,9 +17,13 @@ such that it could be extended for geometrical objects and their manipulations.
 
 In SBT add to `build.sbt`
     
-    lazy val g = RootProject(uri("git:github.com/kmisiunas/GeoScala#master"))
+    lazy val g = RootProject(uri("git://github.com/kmisiunas/GeoScala.git"))
    
     lazy val root = project in file(".") dependsOn g
+
+OR if it was published to local SBT repository (via `sbt publish-local`)
+
+    libraryDependencies += "com.misiunas" % "geoscala_2.11" % "0.2.0"
 
 
 ### Usage
@@ -52,6 +56,7 @@ Yes, you are welcome to contribute code to the library. Get in touch if you woul
 ### ToDo
 
  - [ ] Simplify code base
- - [ ] Add description for downloading from GitHub server
+ - [X] Add description for downloading from GitHub server
  - [ ] Performance tests
+ - [ ] Fix return type inheritance problems 
 
