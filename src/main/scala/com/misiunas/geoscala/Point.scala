@@ -18,9 +18,10 @@ import breeze.linalg.DenseVector
  * Time: 21:21
  */
 class Point protected (override val x: Double, override val y:Double, override val z:Double) extends
-  Vec (x,y,z) with Vector3DLike with Feature  {
+  Vec (x,y,z)  with Feature  {
 
-  override type T = Point
+  //todo: this will cause to return Vec instead of Point
+  override type T = Vec
 
   override protected def makeFrom(e1: Double, e2: Double, e3: Double): Point = new Point(e1,e2,e3)
 
